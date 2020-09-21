@@ -22,4 +22,10 @@ In this framework, android HTML report and Spoon report will also be generated. 
 
 **Spoon Screenshot**
 Test screenshot will be captured using spoon client and image will be saved in Physical device(My Files/Internal storage/app_spoon-screenshots)
-
+<p align="left">
+  <img width="200" height="300" src="https://github.com/RajeshMohanty1982/EspressoMobileTest/blob/master/testersassessment-android/2.jpeg">
+ </p>
+ <p align="left">
+  <img width="200" height="300" src="https://github.com/RajeshMohanty1982/EspressoMobileTest/blob/master/testersassessment-android/1.jpeg">
+ </p>
+ 
