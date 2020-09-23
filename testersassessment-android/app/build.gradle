@@ -1,7 +1,19 @@
+buildscript {
+    repositories{
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
+        classpath 'org.jacoco:org.jacoco.core:0.7.5.201505241946'
+    }
+}
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'spoon'
+    id 'jacoco'
 }
 
 android {
@@ -15,11 +27,29 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
+        debug{
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions{
+        exclude 'LICENSE.txt'
+    }
+}
+
+// spoon configuration
+spoon {
+    //for debug output
+    debug = true
+    //To grant permissions to Android M>= devices
+    grantAllPermissions = true
+    codeCoverage = true
+    //For Sharding, this will execute tests in parallelon multiple devices.
+    shard = true
 }
 
 dependencies {
@@ -31,4 +61,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'com.android.support.test:runner:1.1.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation ('com.android.support.test.espresso:espresso-contrib:3.2.0'){
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+    //For capturing screenshots adding spoon-client
+    androidTestImplementation 'com.squareup.spoon:spoon-client:1.7.1'
+
 }
